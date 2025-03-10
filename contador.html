@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Horas Trabalhadas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+        .day-entry {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        input {
+            width: 90%;
+            padding: 8px;
+            margin: 5px 0;
+        }
+        button {
+            background: blue;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: darkblue;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Calculadora de Horas</h2>
+        
+        <label>Tempo de Almoço Padrão (min):</label>
+        <input type="number" id="almocoPadrao" placeholder="Ex: 60">
+        
+        <div id="dias"></div>
+        
+        <button onclick="adicionarDia()">+ Adicionar Dia</button>
+        <button onclick="calcularTotal()">Calcular Total</button>
+        
+        <p id="resultado"></p>
+    </div>
+
+    <script>
+        function adicionarDia() {
+            let div = document.createElement("div");
+            div.classList.add("day-entry");
+            div.innerHTML = `
+                <label>Hora de Entrada:</label>
+                <input type="time" class="entrada">
+                
+                <label>Hora de Saída:</label>
+                <input type="time" class="saida">
+            `;
+            document.getElementById("dias").appendChild(div);
+        }
+
+        function calcularTotal() {
+            let entradas = document.querySelectorAll(".entrada");
+            let saidas = document.querySelectorAll(".saida");
+            let almoco = parseInt(document.getElementById("almocoPadrao").value) || 0;
+
+            let totalMinutos = 0;
+
+            for (let i = 0; i < entradas.length; i++) {
+                let entrada = entradas[i].value;
+                let saida = saidas[i].value;
+
+                if (!entrada || !saida) {
+                    alert("Preencha todos os campos!");
+                    return;
+                }
+
+                let horaEntrada = new Date("2023-01-01 " + entrada);
+                let horaSaida = new Date("2023-01-01 " + saida);
+
+                let minutosTrabalhados = (horaSaida - horaEntrada) / (1000 * 60) - almoco;
+                totalMinutos += minutosTrabalhados;
+            }
+
+            let horas = Math.floor(totalMinutos / 60);
+            let minutos = totalMinutos % 60;
+
+            document.getElementById("resultado").innerText = `Total: ${horas}h ${minutos}min`;
+        }
+    </script>
+</body>
+</html>
