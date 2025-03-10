@@ -5,107 +5,107 @@
     <meta nome="viewport" conteúdo="width=device-width, initial-scale=1.0">
     <título>Calculadora de Horas Trabalhadas</título>
     <estilo>
-         corpo {
-         fonte-família: Arial, sans-serif;
-         texto-alinhar: centro;
-         margem: 50px;
-         fundo-cor: #f4f4f4;
-                }
-         .receptor {
-         fundo: branco;
-         preenchimento: 20px;
-         raio fronteiriço: 8px;
-         caixa-sombra: 0 0 10px rgba(0, 0, 0, 0,1);
-         larga máxima: 400px;
-         margem: auto;
-                }
-         .entrada diurna {
-         fronteira: 1 px sólido #ddd;
-         preenchimento: 10px;
-         margem: 10px 0;
-         raio fronteiriço: 5px;
-         fundo: #f9f9f9;
-                }
-         entrada {
-         grande: 90%;
-         preenchimento: 8px;
-         margem: 5px 0;
-                }
-         botão {
-         fundo: azul;
-         cor: branco;
-         fronteira: nenhum;
-         preenchimento: 10px;
-         cursor: ponteiro;
-         larga: 100%;
-         margem superior: 10px;
-                }
-         botão:pairar {
-         fundo: azul escuro;
-                }
-         #resultado {
-         margem superior: 20px;
-         peso da fonte: ousado;
-                }
-    </estilo>
+        corpo {
+            fonte-família: Arial, sans-serif;
+            texto-alinhar: centro;
+            margem: 50px;
+            fundo-cor: #f4f4f4;
+        }
+        .recipiente {
+            fundo: branco;
+            preenchimento: 20px;
+            raio fronteiriço: 8px;
+            caixa-sombra: 0 0 10px rgba(0, 0, 0, 0,1);
+            largura máxima: 400px;
+            margem: auto;
+        }
+ .entrada diurna {
+ fronteira: 1 px sólido #ddd;
+ preenchimento: 10px;
+ margem: 10px 0;
+ raio fronteiriço: 5px;
+ fundo: #f9f9f9;
+        }
+ entrada {
+ grande: 90%;
+ preenchimento: 8px;
+ margem: 5px 0;
+        }
+ botão {
+ fundo: azul;
+ cor: branco;
+ fronteira: Nenhum;
+ preenchimento: 10px;
+ cursor: ponteiro;
+ larga: 100%;
+ margem superior: 10px;
+        }
+ botão:emparelhar {
+ fundo: azul escuro;
+        }
+ #resultado {
+ margem superior:20px;
+ peso da fonte: ousado;
+        }
+ </estilo>
 </cabeça>
 <corpo>
     <div classe="contêiner">
         <h2>Calculadora de Horas</h2>
         
         <etiqueta>Tempo de Almoço Padrão (min):</etiqueta>
-        <input type="number" id="almocoPadrao" placeholder="Ex: 60">
+        <entrada tipo="número" ue="almocoPadrao" espaço reservado="Ex: 60">
         
-        <div id="dias"></div>
+        <div ue="dias"></div>
         
-        <button onclick="adicionarDia()">+ Adicionar Dia</button>
-        <button onclick="calcularTotal()">Calcular Total</button>
+        <botão onclick="adicionarDia()">+ Adicionar Dia</botão>
+        <botão onclick="calcularTotal()">Total Calcular</botão>
         
-        <p id="resultado"></p>
-    </div>
+        <p ue="resultado"></p>
+ </div>
 
-    <script>
-        function adicionarDia() {
-            let div = document.createElement("div");
-            div.classList.add("day-entry");
-            div.innerHTML = `
-                <label>Hora de Entrada:</label>
-                <input type="time" class="entrada">
+    <roteiro>
+ função adicionarDia() {
+ deixar div = documento. .criarElemento("div");
+ div.lista de aulas.adicionar ("entrada diária");
+ div.innerHTML = `
+ <etiqueta>Hora de Entrada:</etiqueta>
+ <entrada tipo="tempo" classe="entrada">
                 
-                <label>Hora de Saída:</label>
-                <input type="time" class="saida">
-            `;
-            document.getElementById("dias").appendChild(div);
+ <etiqueta>Hora de Saída:</etiqueta>
+ <entrada tipo="tempo" classe="saida">
+ `;
+ documento. .getElementById("dias"). .anexarCriança(div);
         }
 
-        function calcularTotal() {
-            let entradas = document.querySelectorAll(".entrada");
-            let saidas = document.querySelectorAll(".saida");
-            let almoco = parseInt(document.getElementById("almocoPadrao").value) || 0;
+ função calcularTotal() {
+ deixar entredas = documento. .consultaSelectorTodos("entrada");
+ deixar saidas = documento. .consultaSelectorTodos(".saida");
+ deixar almoco = parseInt(documento. .getElementById("almocoPadrao").valor) || 0;
 
-            let totalMinutos = 0;
+ deixar totalMinutos = 0;
 
-            for (let i = 0; i < entradas.length; i++) {
-                let entrada = entradas[i].value;
-                let saida = saidas[i].value;
+ par (deixar i = 0; i < entredas.comprimento; i++) {
+                deixar entrada = entredas[i].valor;
+                deixar diss = saidas[i].valor;
 
-                if (!entrada || !saida) {
-                    alert("Preencha todos os campos!");
-                    return;
+                se (!entrada || !diss) {
+                    alerta("Preencha todos os campos!");
+ retardo;
                 }
 
-                let horaEntrada = new Date("2023-01-01 " + entrada);
-                let horaSaida = new Date("2023-01-01 " + saida);
+ deixar horaEntrada = novo Dados ("01/01/2023" + entrada);
+ dado Deixar horaSaida = novo ("01/01/2023" + diss);
 
-                let minutosTrabalhados = (horaSaida - horaEntrada) / (1000 * 60) - almoco;
-                totalMinutos += minutosTrabalhados;
+ deixar minutosTrabalhados = (horaSaida - horaEntrada) /(1000*60) - almoco;
+ totalMinutos += minutosTrabalhados;
             }
 
-            let horas = Math.floor(totalMinutos / 60);
-            let minutos = totalMinutos % 60;
+ deixar horas = Matemática. .piso(totalMinutos/60);
+ deixar minutos = totalMinutos % 60;
 
-            document.getElementById("resultado").innerText = `Total: ${horas}h ${minutos}min`;
+ documento. .getElementById("resultado").texto interno = Total: ${horas}h ${minutos}mínimo;
         }
-    </script>
-</body>
+ </roteiro>
+</corpo>
 </html>
